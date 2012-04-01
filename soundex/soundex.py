@@ -25,11 +25,11 @@
 import sys
 import os
 import re
-from common import *
-class Soundex(SilpaModule):
+
+class Soundex:
     def __init__(self):
         self.template=os.path.join(os.path.dirname(__file__), 'soundex.html')
-        self.response = SilpaResponse(self.template)
+        
     def soundexCode(self,char):
         index=0
         lang= language(char)
@@ -43,7 +43,6 @@ class Soundex(SilpaModule):
             return 0    
         return 0    
     
-    @ServiceMethod        
     def soundex(self,name, len=8):
         sndx =''
         fc = ''
@@ -63,7 +62,6 @@ class Soundex(SilpaModule):
         # return soundex code padded to len characters
         return (sndx + (len * '0'))[:len]
     
-    @ServiceMethod        
     def compare(self,string1, string2):
         #do a quick check
         if string1 == string2 : #Exact Match
