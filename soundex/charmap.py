@@ -20,6 +20,9 @@
 #
 # If you find any bugs or have any suggestions email: santhosh.thottingal@gmail.com
 # URL: http://www.smc.org.in
+
+_all_ = [ "language", "charCompare", "lang_base" ]
+
 lang_bases={'en_US':0,'en_IN':0,'hi_IN': 0x0901,'bn_IN': 0x0981, 'pa_IN':0x0A01,'gu_IN':0x0A81 , 'or_IN': 0x0B01,'ta_IN': 0x0B81,'te_IN' : 0x0C01,    'kn_IN' :0x0C81 ,'ml_IN': 0x0D01}
 charmap={ \
 "hi_IN":[ u"ँ", u"ं", u"ः", u"ऄ", u"अ", u"आ", u"इ", u"ई", u"उ", u"ऊ", u"ऋ", u"ऌ", u"ऍ", u"ऎ", u"ए", u"ऐ", u"ऑ", u"ऒ", u"ओ", u"औ", u"क", u"ख", u"ग", u"घ", u"ङ", u"च", u"छ", u"ज", u"झ", u"ञ", u"ट", u"ठ", u"ड", u"ढ", u"ण", u"त", u"थ", u"द", u"ध", u"न", u"ऩ", u"प", u"फ", u"ब", u"भ", u"म", u"य", u"र", u"ऱ", u"ल", u"ळ", u"ऴ", u"व", u"श", u"ष", u"स", u"ह", u"ऺ", u"ऻ", u"़", u"ऽ", u"ा", u"ि", u"ी", u"ु", u"ू", u"ृ", u"ॄ", u"ॅ", u"ॆ", u"े", u"ै", u"ॉ", u"ॊ", u"ो", u"ौ", u"्", u"ॎ", u"ॏ", u"ॐ", u"॑", u"॒", u"॓", u"॔", u"ॕ", u"ॖ", u"ॗ", u"क़", u"ख़", u"ग़", u"ज़", u"ड़", u"ढ़", u"फ़", u"य़", u"ॠ", u"ॡ", u"ॢ", u"ॣ", u"।", u"॥", u"०", u"१", u"२", u"३", u"४", u"५", u"६", u"७", u"८", u"९", u"॰", u"ॱ", u"ॲ", u"ॳ", u"ॴ", u"ॵ", u"ॶ", u"ॷ", u"ॸ", u"ॹ", u"ॺ", u"ॻ", u"ॼ", u"ॽ", u"ॾ", u"ॿ" ], \
