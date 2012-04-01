@@ -25,10 +25,18 @@ import os
 from charmap import *
 
 class Soundex:
-    def __init__(self):
-        self.template=os.path.join(os.path.dirname(__file__), 'soundex.html')
-        
+    """
+      Soundex class provides methods which can be used to perform Soundex phonetic
+      algorithm on Indian languages as well as English.
+    """
     def soundexCode(self,char):
+        """
+          Return the soundex code for given character
+            char - Character for which soundex whose soundex code should be
+                   calculated
+            return - soundex code for given character or 0 on exceptions and
+                     if given character is not valid
+        """
         lang= language(char)
         try:
             if lang == "en_US":
