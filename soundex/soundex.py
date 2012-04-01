@@ -21,17 +21,14 @@
 # If you find any bugs or have any suggestions email: santhosh.thottingal@gmail.com
 # URL: http://www.smc.org.in
 
-
-import sys
 import os
-import re
+from charmap import *
 
 class Soundex:
     def __init__(self):
         self.template=os.path.join(os.path.dirname(__file__), 'soundex.html')
         
     def soundexCode(self,char):
-        index=0
         lang= language(char)
         try:
             if lang == "en_US":
