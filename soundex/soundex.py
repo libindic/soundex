@@ -21,7 +21,6 @@
 # If you find any bugs or have any suggestions email: santhosh.thottingal@gmail.com
 # URL: http://www.smc.org.in
 
-import os
 from charmap import *
 
 class Soundex:
@@ -32,10 +31,10 @@ class Soundex:
     def soundexCode(self,char):
         """
           Return the soundex code for given character
-            char - Character for which soundex whose soundex code should be
-                   calculated
-            return - soundex code for given character or 0 on exceptions and
-                     if given character is not valid
+            char   -- Character for which soundex whose soundex code should be
+                      calculated
+            return -- soundex code for given character or 0 on exceptions and
+                      if given character is not valid
         """
         lang= language(char)
         try:
@@ -48,7 +47,13 @@ class Soundex:
             return 0    
         return 0    
     
-    def soundex(self,name, len=8):
+    def soundex(self,name, length=8):
+        """
+          Calculate soundex of given string
+
+          name   -- String whose soundex should be calculated
+          length -- Length of the `name` default value is 8
+        """
         sndx =''
         fc = ''
         # translate alpha chars in name to soundex digits
@@ -64,10 +69,18 @@ class Soundex:
             sndx = fc + sndx[1:]
 
 
-        # return soundex code padded to len characters
-        return (sndx + (len * '0'))[:len]
+        # return soundex code padded to length characters
+        return (sndx + (length * '0'))[:length]
     
     def compare(self,string1, string2):
+        """
+          Compare soundex of given strings
+
+           string1 -- First string
+           string2 -- Second string
+
+           return -- 0 if both strings are same 1 if soundex of both strings are same
+        """
         #do a quick check
         if string1 == string2 : #Exact Match
             return 0 
@@ -83,8 +96,15 @@ class Soundex:
                 return 2    #Strings doesnot match
         return -1    
     def get_module_name(self):
+        """
+          Return module name
+        """
         return "Soundex"
+    
     def get_info(self):
+        """
+         Return a description for module
+        """
         return     "Soundex Algorithm for Indian Languages and 'sounds like' search across Indian Languages"    
     
 def getInstance():
