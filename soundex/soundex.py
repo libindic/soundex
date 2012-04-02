@@ -23,6 +23,7 @@
 
 from charmap import *
 
+_all_ = [ "Soundex", "get_instance" ]
 class Soundex:
     """
       Soundex class provides methods which can be used to perform Soundex phonetic
