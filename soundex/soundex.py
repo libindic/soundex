@@ -23,20 +23,26 @@
 
 from charmap import *
 
+'''
+
+Soundex class provides methods which can be used to perform Soundex phonetic
+algorithm on Indian languages as well as English.
+
+
+'''
+
 _all_ = [ "Soundex", "get_instance" ]
 class Soundex:
-    """
-      Soundex class provides methods which can be used to perform Soundex phonetic
-      algorithm on Indian languages as well as English.
-    """
+
     def soundexCode(self,char):
-        """
-          Return the soundex code for given character
+        '''Return the soundex code for given character
+
+          Keyword arguments:
             char   -- Character for which soundex whose soundex code should be
                       calculated
             return -- soundex code for given character or 0 on exceptions and
                       if given character is not valid
-        """
+        '''
         lang= language(char)
         try:
             if lang == "en_US":
@@ -49,12 +55,12 @@ class Soundex:
         return 0    
     
     def soundex(self,name, length=8):
-        """
-          Calculate soundex of given string
+        '''Calculate soundex of given string
 
+          Keyword arguments:
           name   -- String whose soundex should be calculated
           length -- Length of the `name` default value is 8
-        """
+        '''
         sndx =''
         fc = ''
         # translate alpha chars in name to soundex digits
@@ -74,14 +80,14 @@ class Soundex:
         return (sndx + (length * '0'))[:length]
     
     def compare(self,string1, string2):
-        """
-          Compare soundex of given strings
+        '''Compare soundex of given strings
 
+          Keyword arguments:
            string1 -- First string
            string2 -- Second string
 
            return -- 0 if both strings are same 1 if soundex of both strings are same
-        """
+        '''
         #do a quick check
         if string1 == string2 : #Exact Match
             return 0 
