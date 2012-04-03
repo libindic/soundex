@@ -13,7 +13,6 @@ setup (
     long_description ="""Soundex Phonetic Code Algorithm Demo for Indian Languages.
  Supports all indian languages and English. Provides intra-indic string comparison""",
     packages = find_packages('.'),
-    namespace_packages = ["soundex"],
     include_package_data = True,
     setup_requires = ['setuptools-git'],
     install_requires = ['setuptools'],
