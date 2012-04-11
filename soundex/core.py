@@ -20,7 +20,7 @@ algorithm on Indian languages as well as English.
 
 '''
 
-_all_ = [ "Soundex", "getInstance" ]
+_all_ = [ "Soundex", "get_instance" ]
 class Soundex:
 
     def soundexCode(self,char):
@@ -103,7 +103,11 @@ class Soundex:
         """
         return     "Soundex Algorithm for Indian Languages and 'sounds like' search across Indian Languages"    
     
-def getInstance():
+def get_instance():
+    '''
+      This function actually allows binding of soundex module to SILPA framework.
+      Provides an instance of Soundex class
+    '''
     return Soundex()
 
             
