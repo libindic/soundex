@@ -31,7 +31,7 @@ algorithm on Indian languages as well as English.
 
 '''
 
-_all_ = [ "Soundex", "get_instance" ]
+_all_ = [ "Soundex", "getInstance" ]
 class Soundex:
 
     def soundexCode(self,char):

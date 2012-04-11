@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup (
     name = "soundex",
@@ -12,7 +12,7 @@ setup (
     description = "Soundex Phonetic Code Algorithm for Indian Languages",
     long_description ="""Soundex Phonetic Code Algorithm Demo for Indian Languages.
  Supports all indian languages and English. Provides intra-indic string comparison""",
-    packages = find_packages('.'),
+    packages = ['soundex'],
     include_package_data = True,
     setup_requires = ['setuptools-git'],
     install_requires = ['setuptools'],
