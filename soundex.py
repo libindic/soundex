@@ -1,5 +1,5 @@
 '''
-  soundex.core
+  soundex
   ~~~~~~~~~~~~
 
   This module implements soundex algorithm components.
@@ -12,17 +12,19 @@
 
 from charmap import *
 
-'''
-
-Soundex class provides methods which can be used to perform Soundex phonetic
-algorithm on Indian languages as well as English.
-
-
-'''
+__title__     = 'soundex'
+__version__   = '0.1'
+__docformat__ = 'restructuredtext'
 
 _all_ = [ "Soundex", "get_instance" ]
 class Soundex:
+    '''
 
+    Soundex class provides methods which can be used to perform Soundex phonetic
+    algorithm on Indian languages as well as English.
+
+
+    '''    
     def soundexCode(self,char):
         '''Return the soundex code for given character
 
