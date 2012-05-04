@@ -16,7 +16,7 @@ __title__     = 'soundex'
 __version__   = '0.1'
 __docformat__ = 'restructuredtext'
 
-_all_ = [ "Soundex", "get_instance" ]
+_all_ = [ "Soundex", "getInstance" ]
 class Soundex:
     '''
 
@@ -105,7 +105,7 @@ class Soundex:
         """
         return     "Soundex Algorithm for Indian Languages and 'sounds like' search across Indian Languages"    
     
-def get_instance():
+def getInstance():
     '''
       This function actually allows binding of soundex module to SILPA framework.
       Provides an instance of Soundex class
