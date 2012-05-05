@@ -103,7 +103,7 @@ class Soundex:
         """
         return     "Soundex Algorithm for Indian Languages and 'sounds like' search across Indian Languages"    
     
-def getIinstance():
+def getInstance():
     '''
       This function actually allows binding of soundex module to SILPA framework.
       Provides an instance of Soundex class
