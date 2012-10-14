@@ -56,6 +56,7 @@ def charCompare(char1, char2):
             if  letter == char1 :   char1_index = charmap[lang].index(char1)
     for lang in charmap:
         for letter in charmap[lang]:
+            letter = letter.decode('utf-8') if type(char2).__name__ == 'unicode' and type(letter).__name__ == 'str' else letter            
             if  letter == char2 :   char2_index = charmap[lang].index(char2)            
                 
     if char1_index == -1 or char2_index  == -1: return -1
