@@ -44,6 +44,10 @@ charmap={ \
 def charCompare(char1, char2):
     #Do a quick check
     if char1 == char2 : return 0
+
+    char1 = char1.decode('utf-8') if type(char1).__name__ == 'str' else char1
+    char2 = char2.decode('utf-8') if type(char2).__name__ == 'str' else char2
+    
     char1_index =-1
     char2_index = -1
     for lang in charmap:
@@ -53,11 +57,12 @@ def charCompare(char1, char2):
         for letter in charmap[lang]:
             if  letter == char2 :   char2_index = charmap[lang].index(char2)            
                 
-    if char1_index == -1 or char1_index  == -1: return -1
+    if char1_index == -1 or char2_index  == -1: return -1
     if char1_index ==  char2_index : return 1
     
 '''Get the language of the given character'''   
 def language(char):
+    char = char.decode('utf-8') if type(char).__name__ == 'str' else char
     for lang in charmap:
         for letter in charmap[lang]:
             if  letter == char :
