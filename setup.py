@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup (
     name = "soundex",
-    version = "0.2",
+    version = "0.3",
     url = "http://silpa.org.in/Soundex",
     license = "LGPL-3.0",
     author = "Santhosh Thottingal",
