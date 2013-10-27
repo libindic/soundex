@@ -5,16 +5,23 @@ $(document).ready(function() {
     $("form").submit(function(event)
     {
         event.preventDefault();
-        id_result = $('#result');
-        id_error = $('#errormessage');
-        id_progress = $('#progress');
-        var word1 = $("input[name=word1]", 'form').val();
-        var word2 = $("input[name=word2]", 'form').val();
-        var jsonRequest = {
-            "method" :  "soundex.compare",
-            "params" : [word1,word2],
-            "id" : ""
-        };
+        var id_result = $('#result'),
+            id_error = $('#errormessage'),
+            id_progress = $('#progress'),
+            word1 = $("input[name=word1]", 'form').val(),
+            word2 = $("input[name=word2]", 'form').val(),
+            jsonRequest = {
+                "method" :  "soundex.compare",
+                "params" : [word1, word2],
+                "id" : ""
+            },
+            messages = [
+                "Words does not match",
+                "Both words are same",
+                "Both words are from same language and sounds alike",
+                "Words are from different language but sounds alike"
+            ];
+
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
@@ -28,15 +35,8 @@ $(document).ready(function() {
             },
             success: function(msg) {
                 id_progress.hide();
-                if(msg.result==0)
-                  id_result.html("Both words are same");
-                if(msg.result<0)
-                  id_result.html("Words does not match");
-                if(msg.result==1)
-                  id_result.html("Both words are from same language and sounds alike");
-                if(msg.result==2)
-                  id_result.html("Words are from different languages but sounds alike");
-                id_result.show();
+                result = parseInt(msg.result, 10) + 1;
+                id_result.html(messages[result] ? messages[result]: messages[0] ).show();
             },
             error: function(msg) {
                 id_progress.hide();
@@ -46,18 +46,17 @@ $(document).ready(function() {
     });
 
     $("input[type=button]", 'form').click(function(e){
-        var id_clicked = e.target.id;
-        if(id_clicked=="button1")
-            var word= $("input[name=word1]", 'form').val();
-        else
-            var word= $("input[name=word2]", 'form').val();
-        var jsonRequest = {
+        var id_clicked = e.target.id.split("button")[1],
+            id_error = $('#errormessage'),
+            id_progress = $('#progress'),
+            jsonRequest = {
                 "method" :  "soundex.soundex",
-                 "params" : [word],
-                 "id" : ""
-                 };
-        id_error = $('#errormessage');
-        id_progress = $('#progress');
+                "params" : [
+                    $("input[name=word" + id_clicked + "]", 'form').val()
+                ],
+                "id" : ""
+            };
+
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
@@ -70,12 +69,8 @@ $(document).ready(function() {
             },
             success: function(msg) {
                 id_progress.hide();
-                // Render it
-                if(id_clicked=="button1")
-                    $('#soundex1').html(msg.result).show();
-                else
-                    $('#soundex2') .html(msg.result).show();
-                    },
+                $('#soundex' + id_clicked).html(msg.result).show();
+            },
             error: function(msg) {
                 id_progress.hide();
                 id_error.html("Something went wrong. Please try again!").show();
@@ -85,6 +80,7 @@ $(document).ready(function() {
 });
 </script>
 {% endblock %}
+
 {% block content %}
           <div class="well">
             <h3>Indic Soundex</h3>
@@ -101,20 +97,19 @@ $(document).ready(function() {
               <input type="button" value="Soundex" class="btn" id="button1" />
               <br/>
               <br/>
-              <div id="soundex1" class="alert alert-info hide"></div>
+              <div id="soundex1" class="alert alert-info silpa-hide"></div>
               <input type="text" name="word2"/>
               <br/>
               <input type="button" value="Soundex" class="btn" id="button2" />
               <br/>
               <br/>
-              <div id="soundex2" class="alert alert-info hide"></div>
+              <div id="soundex2" class="alert alert-info silpa-hide"></div>
               <p class="help-block">To compare two words, enter the words in the below text boxes and press Compare button.</p>
               <input type="submit" id="compare" value="Compare" class="btn"/>
             </form>
             <div id="progress"></div>
-            <div id="successmessage" class="alert alert-success hide"></div>
-            <div id="errormessage" class="alert alert-error hide"></div>
-            <div id="result" class="alert alert-info hide"></div>
+            <div id="errormessage" class="alert alert-error silpa-hide"></div>
+            <div id="result" class="alert alert-info silpa-hide"></div>
             </div>
             <hr/>
             <div class="well">
