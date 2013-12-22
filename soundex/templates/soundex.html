@@ -118,33 +118,34 @@ $(document).ready(function() {
 <div id="progress" class="alert alert-info silpa-hide"></div>
 <div id="errormessage" class="alert alert-danger silpa-hide"></div>
 <div id="result" class="alert alert-success silpa-hide"></div>
+<hr/>
 
-<div class="page-header">
+<div class="well">
     <h3>Python Soundex API</h3>
-</div>
-<p>
-    This service provides indic soundex algorithm based soundex codes for a word
-    <ul>
-        <li>Method: modules.Soundex.soundex
-            <ul>
-                <li>arg1 : the word</li>
-                <li>Return : The soundex code for the word</li>
-            </ul>
-        </li>
-        <li>Method: modules.Soundex.compare
-            <ul>
-                <li>arg1 : first word</li>
-                <li>arg2 : second word</li>
-                <li>Return : 0 if both strings are same, 1 if both strngs sounds alike and from same language, 2 if strings are from different langauges but sounds alike</li>
-            </ul>
-        </li>
-    </ul>
+    <p>
+        This service provides indic soundex algorithm based soundex codes for a word
+        <ul>
+            <li>Method: modules.Soundex.soundex
+                <ul>
+                    <li>arg1 : the word</li>
+                    <li>Return : The soundex code for the word</li>
+                </ul>
+            </li>
+            <li>Method: modules.Soundex.compare
+                <ul>
+                    <li>arg1 : first word</li>
+                    <li>arg2 : second word</li>
+                    <li>Return : 0 if both strings are same, 1 if both strngs sounds alike and from same language, 2 if strings are from different langauges but sounds alike</li>
+                </ul>
+            </li>
+        </ul>
 
-    Sample usage is given below.
-    <pre class="code">
-  >>>print silpaService.soundex.soundex("&#3349;&#3390;&#3376;&#3405;&#8205;&#3364;&#3405;&#3364;&#3391;&#3349;&#3405;")
-  &#3349;APKKBF0
-  >>>print silpaService.soundex.compare("&#3349;&#3390;&#3376;&#3405;&#8205;&#3364;&#3405;&#3364;&#3391;&#3349;&#3405;","&#2965;&#3006;&#2992;&#3021;&#2980;&#3007;&#2965;&#3021;")
-  2</pre>
-</p>
+        Sample usage is given below.
+        <pre>
+      >>>print silpaService.soundex.soundex("&#3349;&#3390;&#3376;&#3405;&#8205;&#3364;&#3405;&#3364;&#3391;&#3349;&#3405;")
+      &#3349;APKKBF0
+      >>>print silpaService.soundex.compare("&#3349;&#3390;&#3376;&#3405;&#8205;&#3364;&#3405;&#3364;&#3391;&#3349;&#3405;","&#2965;&#3006;&#2992;&#3021;&#2980;&#3007;&#2965;&#3021;")
+      2</pre>
+    </p>
+</div>
 {% endblock %}
