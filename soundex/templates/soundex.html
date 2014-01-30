@@ -26,7 +26,7 @@ $(document).ready(function() {
             type: "POST",
             contentType: "application/json; charset=utf-8",
             url: "{{ url_for(main_page + '/JSONRPC' if not main_page == '/' else main_page + 'JSONRPC') }}",
-            data: JSON.stringify(jsonRequest), 
+            data: JSON.stringify(jsonRequest),
             dataType: "json",
             beforeSend:function(){
                 id_result.hide();
@@ -110,7 +110,7 @@ $(document).ready(function() {
 
 
     <div class="form-group">
-        <p class="help-block">To compare two words, enter the words in the below text boxes and press Compare button.</p>
+        <p class="help-block">To compare two words, enter the words in the above text boxes and press Compare button.</p>
         <input type="submit" id="compare" value="Compare" class="btn btn-default"/>
     </div>
 </form>
