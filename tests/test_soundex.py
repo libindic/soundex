@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from soundex.core import getInstance
+from soundex import getInstance
 
 s = getInstance()
 
