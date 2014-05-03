@@ -60,7 +60,7 @@ class Soundex(object):
         except:
             # Case of exception KeyError because we don't have soundex
             # mapping for the character
-            return 0
+            pass
 
         return 0
 
