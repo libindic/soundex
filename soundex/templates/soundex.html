@@ -25,7 +25,7 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
-            url: "{{ url_for(main_page + '/JSONRPC' if not main_page == '/' else main_page + 'JSONRPC') }}",
+            url: "{{ url_for('api.handle_jsonrpc_call') }}",
             data: JSON.stringify(jsonRequest),
             dataType: "json",
             beforeSend:function(){
@@ -60,7 +60,7 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
-            url: "{{ url_for(main_page + '/JSONRPC' if not main_page == '/' else main_page + 'JSONRPC') }}",
+            url: "{{ url_for('api.handle_jsonrpc_call') }}",
             data: JSON.stringify(jsonRequest),
             dataType: "json",
             beforeSend:function(){
