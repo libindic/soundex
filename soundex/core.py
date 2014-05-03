@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
   soundex.core
   ~~~~~~~~~~~~
@@ -5,109 +6,154 @@
   This module implements soundex algorithm components.
 
   :copyright: (c) 2009-2012 by Santhosh Thottingal
+  :copyright: (c) 2012-2014 by SILPA Developers
   :license: LGPL-3.0+, see LICENSE file for more details
 '''
 
-# -*- coding: utf-8 -*-
+_all_ = ["Soundex", "getInstance"]
 
-from charmap import *
+from itertools import repeat
+from silpa_common import servicemethod
+from silpa_common.charmap import get_language, charmap
 
 '''
-
 Soundex class provides methods which can be used to perform Soundex phonetic
 algorithm on Indian languages as well as English.
-
-
 '''
 
-_all_ = [ "Soundex", "getInstance" ]
-class Soundex:
 
-    def soundexCode(self,char):
+_soundex_map = {
+    "soundex_en": ["0", "1", "2", "3", "0", "1", "2", "0", "0", "2", "2", "4",
+                   "5", "5", "0", "1", "2", "6", "2", "3", "0", "1", "0", "2",
+                   "0", "2"],
+    "soundex": ['0', 'N', '0', '0', 'A', 'A', 'B', 'B', 'C', 'C', 'P', 'Q',
+                '0', 'D', 'D', 'D', 'E', 'E', 'E', 'E', 'F', 'F', 'F', 'F',
+                'G', 'H', 'H', 'H', 'H', 'G', 'I', 'I', 'I', 'I', 'J', 'K',
+                'K', 'K', 'K', 'L', 'L', 'M', 'M', 'M', 'M', 'N', 'O', 'P',
+                'P', 'Q', 'Q', 'Q', 'R', 'S', 'S', 'S', 'T', '0', '0', '0',
+                '0', 'A', 'B', 'B', 'C', 'C', 'P', 'P', 'E', 'D', 'D', 'D',
+                'D', 'E', 'E', 'E', '0', '0', '0', '0', '0', '0', '0', '0',
+                '0', '0', 'E', '0', '0', '0', '0', '0', '0', '0', '0', 'P',
+                'Q', 'Q', 'Q', '0', '0', '0', '1', '2', '3', '4', '5', '6',
+                '7', '8', '9', '0', '0', '0', '0', '0', '0', '0', '0', '0',
+                '0', 'J', 'J', 'Q', 'P', 'P', 'F'],
+}
+
+
+class Soundex(object):
+
+    def soundexCode(self, char):
         '''Return the soundex code for given character
 
-          Keyword arguments:
-            char   -- Character for which soundex whose soundex code should be
-                      calculated
-            return -- soundex code for given character or 0 on exceptions and
-                      if given character is not valid
+           :param char:
+               Character whose soundex code is needed
+           :return:
+               Returns soundex code if character is found in charmap
+               else returns 0
         '''
-        lang= language(char)
+        lang = get_language(char)
         try:
             if lang == "en_US":
-                return charmap["soundex_en"][charmap[lang].index(char)]
+                return _soundex_map["soundex_en"][charmap[lang].index(char)]
             else:
-                return charmap["soundex"][charmap[lang].index(char)]    
+                return _soundex_map["soundex"][charmap[lang].index(char)]
         except:
-            '''In case of any exception- Mostly because of character not found in charmap'''
-            return 0    
-        return 0    
-    
-    def soundex(self,name, length=8):
+            # Case of exception KeyError because we don't have soundex
+            # mapping for the character
+            return 0
+
+        return 0
+
+    @servicemethod
+    def soundex(self, name, length=8):
         '''Calculate soundex of given string
 
-          Keyword arguments:
-          name   -- String whose soundex should be calculated
-          length -- Length of the `name` default value is 8
+           This function calculates soundex for Indian language string
+           as well as English string.
+
+           This function is exposed as service method for JSONRPC in
+           SILPA framework.
+
+           :param name: String whose Soundex value to be calculated
+           :param length: Length of final Soundex string, if soundex
+                          caculated is more than this it will be
+                          truncated to length.
+           :return: Soundex string of `name'
         '''
-        sndx =''
-        fc = ''
+        sndx = []
+        fc = name[0]
+
         # translate alpha chars in name to soundex digits
-        for c in name.lower():
-            if not fc: fc = c   # remember first letter
+        for c in name[1:].lower():
             d = str(self.soundexCode(c))
+
             # remove all 0s from the soundex code
-            if d== '0' : continue
+            if d == '0':
+                continue
+
             # duplicate consecutive soundex digits are skipped
-            if not sndx or (d != sndx[-1]):
-                sndx += d
-            # replace first digit with first alpha character
-            sndx = fc + sndx[1:]
+            if len(sndx) == 0:
+                sndx.append(d)
+            elif d != sndx[-1]:
+                sndx.append(d)
 
+        # append first character to result
+        sndx.insert(0, fc)
 
-        # return soundex code padded to length characters
-        return (sndx + (length * '0'))[:length]
-    
-    def compare(self,string1, string2):
+        if get_language(name[0]) == 'en_US':
+            # Don't padd
+            return ''.join(sndx)
+
+        if len(sndx) < length:
+            sndx.extend(repeat('0', length))
+            return ''.join(sndx[:length])
+
+        return ''.join(sndx[:length])
+
+    @servicemethod
+    def compare(self, string1, string2):
         '''Compare soundex of given strings
 
-          Keyword arguments:
-           string1 -- First string
-           string2 -- Second string
+           This function checks if 2 given strings are phonetically
+           sounds same by doing soundex code comparison
 
-           return -- 0 if both strings are same 1 if soundex of both strings are same
+           :param string1: First string for comparison
+           :param string2: Second string for comparison
+
+           :return: Returns 0 if both strings are same, 1 if strings
+                    sound phonetically same, -1 if strings are
+                    phonetically not same.
+
         '''
-        #do a quick check
-        if string1 == string2 : #Exact Match
-            return 0 
-        soundex1=    self.soundex(string1)
-        soundex2=    self.soundex(string2)
-        if soundex1 == soundex2    : #Both sounds alike
+        # do a quick check
+        if string1 == string2:
+            return 0
+
+        string1_lang = get_language(string1[0])
+        string2_lang = get_language(string2[0])
+
+        if (string1_lang == 'en_US' and string2_lang != 'en_US') or \
+           (string1_lang != 'en_US' and string2_lang == 'en_US'):
+            # Can't Soundex compare English and Indic string
+            return -1
+
+        soundex1 = self.soundex(string1)
+        soundex2 = self.soundex(string2)
+
+        if soundex1[1:] == soundex2[1:]:
+            # Strings sound phonetically same
             return 1
-        if    language(string1[0]) == "en_US": 
-            return -1 #need not check for crosslanguage for English
-        #Check whether the first letters are phonetically same from different languages
-        if self.soundexCode( string1[0]) == self.soundexCode(string2[0]):
-            if soundex1[1:] == soundex2[1:]    : #Both sounds alike
-                return 2    #Strings doesnot match
-        return -1    
-    def get_module_name(self):
-        """
-          Return module name
-        """
-        return "Soundex"
-    
-    def get_info(self):
-        """
-         Return a description for module
-        """
-        return     "Soundex Algorithm for Indian Languages and 'sounds like' search across Indian Languages"    
-    
+
+        # Strings are not same
+        return -1
+
+
 def getInstance():
-    '''
-      This function actually allows binding of soundex module to SILPA framework.
-      Provides an instance of Soundex class
+    ''' Return Soundex instance
+
+        This function returns instance of Soundex class and is used
+        mainly by SILPA framework
+
+        :return: Soundex instance
     '''
     return Soundex()
-
-            
