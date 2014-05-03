@@ -1,12 +1,15 @@
 Soundex
 #######
 
-.. image:: https://travis-ci.org/Project-SILPA/soundex.svg?branch=master
+.. image::
+   https://travis-ci.org/Project-SILPA/soundex.svg?branch=master
    :target: https://travis-ci.org/Project-SILPA/soundex
 
 
-.. image:: https://coveralls.io/repos/Project-SILPA/soundex/badge.png
-  :target: https://coveralls.io/r/Project-SILPA/soundex
+
+.. image::
+   https://coveralls.io/repos/Project-SILPA/soundex/badge.png?branch=master
+  :target: https://coveralls.io/r/Project-SILPA/soundex?branch=master
 
 
 Soundex is phonetic algorithm for indexing names by sound as
