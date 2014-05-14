@@ -121,8 +121,10 @@ class Soundex(object):
            :param string2: Second string for comparison
 
            :return: Returns 0 if both strings are same, 1 if strings
-                    sound phonetically same, -1 if strings are
-                    phonetically not same.
+                    sound phonetically same, 2 if strings are
+                    phonetically not same. We can't perform English
+                    cross language comparision if English string is
+                    passed as one function will return -1.
 
         '''
         # do a quick check
@@ -145,7 +147,7 @@ class Soundex(object):
             return 1
 
         # Strings are not same
-        return -1
+        return 2
 
 
 def getInstance():
