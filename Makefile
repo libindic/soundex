@@ -1,6 +1,6 @@
 travis:
 	nosetests -s --with-coverage --cover-package=soundex
-	flake8 soundex tests
+	flake8 soundex
 
 clean:
 	find . -name "*.pyc" -exec rm -vf {} \;
