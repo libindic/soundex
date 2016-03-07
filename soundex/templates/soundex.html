@@ -25,7 +25,7 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
-            url: "JSONRPC",
+            url: "/api/JSONRPC",
             data: JSON.stringify(jsonRequest),
             dataType: "json",
             beforeSend:function(){
@@ -60,7 +60,7 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
-            url: "JSONRPC",
+            url: "/api/JSONRPC",
             data: JSON.stringify(jsonRequest),
             dataType: "json",
             beforeSend:function(){

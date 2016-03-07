@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-from itertools import repeat
-from silpa_common import servicemethod
-from silpa_common.charmap import get_language, charmap
 '''
   soundex
   ~~~~~~~~
@@ -12,9 +9,11 @@ from silpa_common.charmap import get_language, charmap
   :copyright: (c) 2012-2014 by SILPA Developers
   :license: LGPL-3.0+, see LICENSE file for more details
 '''
+from itertools import repeat
+from silpa_common import servicemethod
+from silpa_common.charmap import get_language, charmap
 
 _all_ = ["Soundex", "getInstance"]
-
 
 '''
 Soundex class provides methods which can be used to perform Soundex phonetic
