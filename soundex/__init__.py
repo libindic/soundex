@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+from itertools import repeat
+from silpa_common import servicemethod
+from silpa_common.charmap import get_language, charmap
 '''
   soundex
   ~~~~~~~~
@@ -9,11 +12,9 @@
   :copyright: (c) 2012-2014 by SILPA Developers
   :license: LGPL-3.0+, see LICENSE file for more details
 '''
-from itertools import repeat
-from silpa_common import servicemethod
-from silpa_common.charmap import get_language, charmap
 
 _all_ = ["Soundex", "getInstance"]
+
 
 '''
 Soundex class provides methods which can be used to perform Soundex phonetic
@@ -141,12 +142,16 @@ class Soundex(object):
         soundex1 = self.soundex(string1)
         soundex2 = self.soundex(string2)
 
-        if soundex1[1:] == soundex2[1:]:
-            # Strings sound phonetically same
+        if soundex1[1:] == soundex2[1:] and soundex1[0] == soundex2[0]:
+            # Strings sound phonetically same and same language
             return 1
 
-        # Strings are not same
-        return 2
+        if soundex1[1:] == soundex2[1:] and soundex1[0] != soundex2[0]:
+            # Strings sound phonetically same but different language
+            return 2
+        else:
+            # Strings are not same
+            return -1
 
 
 def getInstance():
