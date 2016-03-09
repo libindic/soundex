@@ -18,6 +18,6 @@ class SoundexTest(unittest.TestCase):
     def test_compare(self):
         '''TEST: Soundex Comparison'''
         self.assertEqual(self.s.compare('Bangalore', u'ಬೆಂಗಳೂರು'), -1)
-        self.assertEqual(self.s.compare(u'ಬೆಂಗಳೂರು', u'बॆंगळूरु'), 1)
+        self.assertEqual(self.s.compare(u'ಬೆಂಗಳೂರು', u'बॆंगळूरु'), 2)
         self.assertEqual(self.s.compare(u'बॆंगळूरु', u'बॆंगळूरु'), 0)
-        self.assertEqual(self.s.compare(u'बॆंगळूरु', u'आम्र् फल्'), 2)
+        self.assertEqual(self.s.compare(u'बॆंगळूरु', u'आम्र् फल्'), -1)
