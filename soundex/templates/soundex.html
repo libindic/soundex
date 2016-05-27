@@ -13,7 +13,8 @@ $(document).ready(function() {
             jsonRequest = {
                 "method" :  "soundex.compare",
                 "params" : [word1, word2],
-                "id" : ""
+                "id" : "jsonrpc",
+		"jsonrpc": "2.0"
             },
             messages = [
                 "Words does not match",
@@ -54,7 +55,8 @@ $(document).ready(function() {
                 "params" : [
                     $("input[name=word" + id_clicked + "]", 'form').val()
                 ],
-                "id" : ""
+                "id" : "jsonrpc",
+		"jsonrpc": "2.0"
             };
 
         $.ajax({
