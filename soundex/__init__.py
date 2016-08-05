@@ -159,3 +159,19 @@ def getInstance():
         :return: Soundex instance
     '''
     return Soundex()
+
+
+def soundex_soundex(name, length):
+    return Soundex().soundex(name, length)
+
+
+def soundex_compare(s1, s2):
+    return Soundex().compare(s1, s2)
+
+
+def expose_soundex():
+    return [soundex_soundex, str, str, int]
+
+
+def expose_compare():
+    return [soundex_compare, str, str, str]
