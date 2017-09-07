@@ -14,7 +14,7 @@ Details on how Soundex is implemented can be found at
 1. Clone the repository `git clone https://github.com/libindic/soundex.git`
 2. Change to the cloned directory `cd soundex`
 3. Run setup.py to create installable source `python setup.py sdist`
-3. Install using pip `pip install dist/libindic-soundex*.tar.gz`
+4. Install using pip `pip install dist/libindic-soundex*.tar.gz`
 
 ## Usage
 ```
