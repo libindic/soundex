@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from itertools import repeat
-from silpa_common import servicemethod
-from silpa_common.charmap import get_language, charmap
+from libindic.utils import servicemethod
+from libindic.utils.charmap import get_language, charmap
 '''
   soundex
   ~~~~~~~~
