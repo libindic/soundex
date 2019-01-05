@@ -15,12 +15,12 @@
                     "params": [word1, word2],
                     "id": ""
                 },
-                messages = [
-                    "Words does not match",
-                    "Both words are same",
-                    "Both words are from same language and sounds alike",
-                    "Words are from different language but sounds alike"
-                ];
+                messages = {
+                    "-1": "Words does not match",
+                    "0": "Both words are same",
+                    "1": "Both words are from same language and sounds alike",
+                    "2": "Words are from different language but sounds alike"
+                };
 
             $.ajax({
                 type: "POST",
@@ -33,10 +33,9 @@
                     id_error.hide();
                     id_progress.html("Processing. Please Wait..").show();
                 },
-                success: function (msg) {
+                success: function (response) {
                     id_progress.hide();
-                    result = parseInt(msg.result, 10) + 1;
-                    id_result.html(messages[result] ? messages[result] : messages[0]).show();
+                    id_result.html(messages[response.result]).show();
                 },
                 error: function (msg) {
                     id_progress.hide();
